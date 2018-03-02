@@ -4,52 +4,18 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Labyrinthe</title>
-	<script src="script.js"></script>
-	<script src="util.js"></script>
-	<style type="text/css" media="print">
-		.commande,
-		div#debug {
-			display: none;
-			border: 5px solid #CCCCCC;
-		}
-
-		.affichage {
-			margin: auto;
-		}
-
-	</style>
-	<style type="text/css">
-		.affichage {
-			border: 5px outset #999999;
-			display: table-cell;
-		}
-		table img {
-			display:block;
-		}
-	</style>
+	<link rel="stylesheet" href="js/laby.css">
+	<script src="js/App.js"></script>
+	<script src="js/Cellule.js"></script>
+	<script src="js/Curseur.js"></script>
+	<script src="js/Point.js"></script>
+	<script src="js/Sprite.js"></script>
+	<script src="js/Perso.js"></script>
+	<script src="js/Labyrinthe.js"></script>
+	<script src="js/Skin.js"></script>
+	<script src="js/Jeu.js"></script>
 </head>
 
-<body>
-	<form action="" method="post" name="commande" class="commande" id="commande">
-		<p class="commande"> Skin
-			<script>
-				document.write(affichageSkins());
-			</script>
-			<br />
-			<input type="button" name="taille" value="Petit" onclick="creer('labyrinthe',10,12);" />
-			<input type="button" name="taille" value="Moyen" onclick="creer('labyrinthe',15,20)" />
-			<input type="button" name="taille" value="Grand" onclick="creer('labyrinthe',28,21)" />
-			<input type="button" name="taille" value="Personnalis&eacute;" onclick="compPerso('labyrinthe')" /> Largeur
-			<input name="largeur" type="text" size="5" id="largeur" /> Hauteur
-			<input name="hauteur" type="text" size="5" id="hauteur" /> Voir le suivi
-			<input name="suivi" type="checkbox" id="suivi" value="true" checked="checked" />
-		</p>
-		<p class="commande">
-			<input type="button" name="Submit3" value="Imprimer" onclick="print();" />
-		</p>
-	</form>
-	<div id="labyrinthe" class="affichage" style=""></div>
-	<div id="debug"></div>
-</body>
+<body></body>
 
 </html>

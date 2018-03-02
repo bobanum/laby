@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Document sans titre</title>
+	<style type="text/css" media="print">
+		.commande,
+		div#debug {
+			display: none;
+			border: 5px solid #CCCCCC;
+		}
+
+		.affichage {
+			margin: auto;
+		}
+
+	</style>
+	<style type="text/css">
+		.affichage {
+			border: 5px outset #999999;
+			display: table-cell;
+		}
+
+		div#debug {
+			clear: both;
+		}
+
+	</style>
+	<script src="util.js"></script>
+	<script>
+		var laby;
+		var skincourant = "pierre";
+		var skins = ["pierre", "brique", "ligne", "ligne2", "courbe", "rond", "bosses", "creux", "mur", "tuyau", "autre", "angle", "angle2", "rough", "route"];
+
+		function affichageSkins() {
+			var resultat = "";
+			var skin;
+			for (var x = 0; x < skins.length; x++) {
+				skin = skins[x];
+				resultat += '<input type="radio" name="skin" value="' + skin + '" id="' + skin + '" onchange="changerSkin(this);" />';
+				resultat += '<label for="' + skin + '"><img src="' + skin + '/0.gif" width="32" height="32" align="absbottom" /></label>';
+			}
+			return resultat;
+		}
+
+		function changerSkin(objet) {
+			skincourant = objet.value;
+			laby.dessiner(skincourant, 'lab');
+		}
+
+		function perso() {
+			largeur = parseInt(document.getElementById("largeur").value);
+			hauteur = parseInt(document.getElementById("hauteur").value);
+			if (isNaN(largeur)) largeur = 15;
+			if (isNaN(hauteur)) hauteur = 15;
+			return labyrinthe(largeur, hauteur);
+		}
+
+	</script>
+	<script src="proc.js"></script>
+
+</head>
+
+<body>
+	<h1>Construisez votre labyrinthe</h1>
+	<form action="" method="post" name="commande" class="commande" id="commande">
+		<p class="commande">
+			<input type="button" name="taille" value="Petit" onclick="laby = new Labyrinthe(12,16); message2(laby.sortir());" />
+			<input type="button" name="taille" value="Moyen" onclick="laby = new Labyrinthe(21,16); message2(laby.sortir());" />
+			<input type="button" name="taille" value="Grand" onclick="laby = new Labyrinthe(21,28); message2(laby.sortir());" />
+			<input type="button" name="taille" value="Personnalis&eacute;" onclick="laby = Labyrinthe.perso(); message2(laby.sortir());" /> Largeur
+			<input name="largeur" type="text" size="5" id="largeur" /> Hauteur
+			<input name="hauteur" type="text" size="5" id="hauteur" />
+		</p>
+	</form>
+	<div id="debug"></div>
+</body>
+
+</html>

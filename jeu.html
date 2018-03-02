@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Labyrinthe</title>
+	<script src="proc.js"></script>
+	<script src="util.js"></script>
+	<script>
+		var laby;
+		var mouvements = 0;
+		var perso = "joe";
+		var cheminPersos = "persos/";
+		var largeur = 10;
+		var hauteur = 10;
+		var skin = "pierre";
+
+		function init(largeur, hauteur) {
+			mouvements = 0;
+			document.onkeypress = touche;
+			var dedal = labyrinthe(largeur, hauteur);
+			document.getElementById("lab").innerHTML = affichageBG(dedal, skin);
+			laby = document.getElementById("lab").firstChild.firstChild;
+			laby.hauteur = laby.childNodes.length;
+			laby.largeur = laby.childNodes[0].childNodes.length;
+			for (var x = 0; x < laby.largeur; x++) {
+				if (dedal[0][x] & 1) {
+					laby.colonne = x;
+				}
+			}
+			laby.rangee = 0;
+			laby.childNodes[laby.rangee].childNodes[laby.colonne].firstChild.src = cheminPersos + perso + "/d2.gif";
+			document.getElementById('mouvements').innerHTML = mouvements;
+		}
+
+		function touche(event) {
+			//detail(event.bubbles);
+			var image = laby.childNodes[laby.rangee].childNodes[laby.colonne].firstChild.style.backgroundImage;
+			var etat = parseInt(image.substr(image.lastIndexOf("/") + 1));
+			laby.childNodes[laby.rangee].childNodes[laby.colonne].firstChild.src = "espace.gif";
+			switch (event.keyCode) {
+				case 37: // gauche
+					dir = 3;
+					if (etat & 8) {
+						laby.colonne = laby.colonne - 1;
+						mouvements++;
+					}
+					break;
+				case 38: // haut
+					dir = 0;
+					if (etat & 1) {
+						laby.rangee = laby.rangee - 1;
+						mouvements++;
+					}
+					break;
+				case 39: // droite
+					dir = 1;
+					if (etat & 2) {
+						laby.colonne = laby.colonne + 1;
+						mouvements++;
+					}
+					break;
+				case 40: // bas
+					dir = 2;
+					if (etat & 4) {
+						laby.rangee = laby.rangee + 1;
+						mouvements++;
+					}
+					break;
+				default:
+					dir = 2;
+			}
+			document.getElementById('mouvements').innerHTML = mouvements;
+			if (laby.rangee == laby.hauteur || laby.colonne == laby.largeur) {
+				alert("Bravo! Vous avez parcouru le labyrinthe en " + mouvements + " mouvements.");
+				init(largeur, hauteur);
+			} else if (laby.rangee < 0 || laby.colonne < 0) {
+				alert("Froussard!!!");
+				init(largeur, hauteur);
+			} else {
+				laby.childNodes[laby.rangee].childNodes[laby.colonne].firstChild.src = cheminPersos + perso + "/d" + dir + ".gif";
+			}
+			event.cancelBubble = true;
+		}
+
+		function changerPerso(nPerso) {
+			perso = nPerso;
+			laby.childNodes[laby.rangee].childNodes[laby.colonne].firstChild.src = cheminPersos + perso + "/d" + 2 + ".gif";
+		}
+
+		function appliquerPerso(objet) {
+			var perso = objet.src;
+			perso = perso.substr(0, perso.length - 7);
+			perso = perso.substr(perso.lastIndexOf('/') + 1);
+			changerPerso(perso);
+		}
+
+		function changerSkin(nSkin) {
+			skin = nSkin;
+			var largeur = laby.largeur;
+			var hauteur = laby.hauteur;
+
+			for (var rangee = 0; rangee < hauteur; rangee++) {
+				for (var colonne = 0; colonne < largeur; colonne++) {
+					var leStyle = laby.childNodes[rangee].childNodes[colonne].firstChild.style;
+					var image = leStyle.backgroundImage;
+					var etat = parseInt(image.substr(image.lastIndexOf("/") + 1));
+					leStyle.backgroundImage = "url(" + skin + "/" + etat + ".gif)";
+				}
+			}
+		}
+
+		function appliquerSkin(objet) {
+			var skin = objet.src;
+			skin = skin.substr(0, skin.length - 6);
+			skin = skin.substr(skin.lastIndexOf('/') + 1);
+			changerSkin(skin);
+		}
+
+	</script>
+</head>
+
+<body onload="init(10,10)">
+	<div>
+		<table>
+			<tr>
+				<td><img src="joe/d2.gif" width="32" height="32" onclick="appliquerPerso(this)" /> <img src="jane/d2.gif" width="32" height="32" onclick="appliquerPerso(this)" /> <img src="loup/d2.gif" width="32" height="32" onclick="appliquerPerso(this)" /> <img src="mamie/d2.gif" width="32" height="32" onclick="appliquerPerso(this)" /></td>
+				<td><img src="brique/0.gif" width="32" height="32" onclick="appliquerSkin(this)" /> <img src="pierre/0.gif" width="32" height="32" onclick="appliquerSkin(this)" /> <img src="creux/0.gif" width="32" height="32" onclick="appliquerSkin(this)" /> <img src="bosses/0.gif" width="32" height="32" onclick="appliquerSkin(this)" /> <img src="courbe/0.gif" width="32" height="32" onclick="appliquerSkin(this)" /> <img src="rond/0.gif" width="32" height="32" onclick="appliquerSkin(this)" /></td>
+				<td>
+					<input type="submit" name="Submit" value="Petit" onclick="init(largeur=7,hauteur=7)" />
+					<input type="submit" name="Submit2" value="Moyen" onclick="init(largeur=10,hauteur=10)" />
+					<input type="submit" name="Submit3" value="Grand" onclick="init(largeur=15,hauteur=15)" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="lab"></div>
+	<div>Nombre de mouvements : <span id="mouvements" style="color:blue; font-weight:bold;">0</span></div>
+	<div id="debug"> </div>
+</body>
+
+</html>

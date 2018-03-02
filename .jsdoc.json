@@ -1,0 +1,25 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc"]
+    },
+    "source": {
+        "include": ["."],
+		"includePattern": ".js$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "templates": {
+        "referenceTitle": "Labyrinthe",
+        "disableSort": false
+    },
+    "opts": {
+        "destination": "./docs/api",
+        "encoding": "utf8",
+        "private": true,
+        "recurse": true,
+        "template": "C:/Users/bo_ba/node_modules/jsdoc/templates/boxy"
+    }
+}

@@ -3,11 +3,15 @@
 class Skin {
 	/**
 	 * Constructor
-	 * @param {[[Type]]} skin       [[Description]]
+	 * @param {string} skin L'adresse du skin (le nom seulement)
 	 */
 	constructor(skin) {
 		this.skin = skin;
 	}
+	/**
+	 * Le dom de la grille à afficher
+	 * @type {HTMLElement}
+	 */
 	get dom() {
 		if (!this._dom) {
 			this.dom = this.dom_creer();
@@ -57,42 +61,32 @@ class Skin {
 		document.getElementById(id).innerHTML = this.affichage(skin);
 	}
 	changerSkin(objet) {
-			var skincourant;
-			skincourant = objet.value;
-			this.dessiner(skincourant, 'lab');
-		}
-		/**
-		 * [[Description]]
-		 * @param   {object}   cellule [[Description]]
-		 * @returns {[[Type]]} [[Description]]
-		 */
+		var skincourant;
+		skincourant = objet.value;
+		this.dessiner(skincourant, 'lab');
+	}
 	static url(image) {
-			var resultat;
-			resultat = this.chemin;
-			if (image !== undefined) {
-				resultat += '/' + image;
-			}
-			return resultat;
+		var resultat;
+		resultat = this.chemin;
+		if (image !== undefined) {
+			resultat += '/' + image;
 		}
-		/**
-		 * [[Description]]
-		 * @param   {object}   cellule [[Description]]
-		 * @returns {[[Type]]} [[Description]]
-		 */
+		return resultat;
+	}
 	url(cellule) {
-			var resultat = '';
-			if (cellule === undefined) {
-				resultat += '' + Skin.chemin + '/' + this.skin + '.gif';
-			} else {
-				resultat += '' + Skin.chemin + '/' + this.skin + '/' + cellule.binaire + '.gif';
-			}
-			return resultat;
+		var resultat = '';
+		if (cellule === undefined) {
+			resultat += '' + Skin.chemin + '/' + this.skin + '.gif';
+		} else {
+			resultat += '' + Skin.chemin + '/' + this.skin + '/' + cellule.binaire + '.gif';
 		}
-		/**
-		 * [[Description]]
-		 * @param   {object}   cellule [[Description]]
-		 * @returns {[[Type]]} [[Description]]
-		 */
+		return resultat;
+	}
+	/**
+	 * Retourne la valeur de la propriete CSS background-position d'une cellule
+	 * @param   {Cellule} cellule La cellule à observer
+	 * @returns {string}  La valeur. ex.: "-1em, -4em
+	 */
 	dom_BGPos(cellule) {
 		var resultat;
 		var posbg = [
@@ -114,9 +108,9 @@ class Skin {
 		this.styles.skin = s.sheet.cssRules[0].style;
 		this.styles.grille = s.sheet.cssRules[1].style;
 		this.styles.cellule = s.sheet.cssRules[2].style;
-		this.styles.grille.backgroundImage = 'url("../textures/plancherbriques/256.png")';
+		this.styles.grille.backgroundImage = 'url("'+this.cheminTexture('plancherbriques/256.png')+'")';
 		this.styles.grille.backgroundSize = '100px';
-		this.styles.cellule.backgroundImage = 'url("../skins/gravier2.png")';
+		this.styles.cellule.backgroundImage = 'url("'+this.chemin('gravier2.png')+'")';
 	}
 	static perso() {
 		var largeur, hauteur;
@@ -130,8 +124,23 @@ class Skin {
 		}
 		return new this(largeur, hauteur);
 	}
+	static chemin(fic) {
+		if (fic === undefined) {
+			return this._chemin;
+		} else {
+			return this._chemin + "/" + fic;
+		}
+	}
+	static cheminTexture(fic) {
+		if (fic === undefined) {
+			return this._cheminTextures;
+		} else {
+			return this._cheminTextures + "/" + fic;
+		}
+	}
 	static init() {
-		this.prototype.chemin = this.chemin = "skins";
+		this._chemin = "../images/skins";
+		this._cheminTextures = "../images/textures";
 		this.prototype.skin = this.skin = "pierre";
 		this.skins = ["pierre", "brique", "ligne", "ligne2", "courbe", "rond", "bosses", "creux", "mur", "tuyau", "autre", "angle", "angle2", "rough", "route"];
 		window.addEventListener("load", function () {

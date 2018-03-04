@@ -1,0 +1,3 @@
+[submodule "geometrie"]
+	path = geometrie
+	url = https://bobanum@github.com/bobanum/geometrie

@@ -2,7 +2,7 @@
 /*globals Sprite*/
 class Perso extends Sprite {
 	constructor(url) {
-		super("persos/" + url);
+		super(Perso.chemin(url));
 		this.queue = [];
 	}
 	init(props) {
@@ -115,7 +115,15 @@ class Perso extends Sprite {
 			}
 		};
 	}
+	static chemin(fic) {
+		if (fic === undefined) {
+			return this._chemin;
+		} else {
+			return this._chemin + "/" + fic;
+		}
+	}
 	static init() {
+		this._chemin = "images/persos";
 		this.prototype.animMouvement = 500;
 		this.prototype.animPas = 300;
 	}

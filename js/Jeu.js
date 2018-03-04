@@ -24,11 +24,11 @@ class Jeu {
 					document.body.appendChild(jeu.skin.dom);
 					var perso = new Perso("wnv1.png").init({classe:'femme', cellule: jeu.labyrinthe.cellule(0,0)});
 					jeu.ajouter("femme", perso);
-					var coffre = new Sprite("persos/coffre.png").init({classe:'coffre', x:largeur - 0.5, y:hauteur - 0.5});
+					var coffre = new Sprite(Perso.chemin("coffre.png")).init({classe:'coffre', x:largeur - 0.5, y:hauteur - 0.5});
 					jeu.skin.dom.appendChild(coffre.dom);
-					var portes = new Sprite("../persos/porte.png").init({classe:'portes', x:(largeur - 1) * 2, y:(hauteur - 1) * 2});
+					var portes = new Sprite(Perso.chemin("porte.png")).init({classe:'portes', x:(largeur - 1) * 2, y:(hauteur - 1) * 2});
 					jeu.skin.dom.appendChild(portes.dom);
-					var cle = new Sprite("../persos/cle.png").init({classe:'cle', x:largeur - 0.5, y:hauteur - 0.5});
+					var cle = new Sprite(Perso.chemin("cle.png")).init({classe:'cle', x:largeur - 0.5, y:hauteur - 0.5});
 					jeu.skin.dom.appendChild(cle.dom);
 				}
 			}

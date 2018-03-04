@@ -9,7 +9,7 @@ body {
   align-items: center;
   justify-content: center;
   background-color: green;
-  background-image: url(../skins/plancherbriques/plancherbriques_128.png);
+  background-image: url(../images/skins/plancherbriques/plancherbriques_128.png);
   background-image: url(../images/gazon_256.jpg);
   background-size: 128px;
 }
@@ -87,7 +87,7 @@ div.grille > div > img {
   animation-iteration-count: 0;
 }
 *.coffre {
-  background-image: url(../persos/coffre.png);
+  background-image: url(../images/persos/coffre.png);
   transition-property: background-position;
   transition-duration: .1s;
   transition-timing-function: steps(3);
@@ -98,7 +98,7 @@ div.grille > div > img {
   z-index: 1000;
 }
 *.cle {
-  background-image: url(../persos/cle.png);
+  background-image: url(../images/persos/cle.png);
   background-position: center center;
   pointer-events: none;
   z-index: 1001;
@@ -106,7 +106,7 @@ div.grille > div > img {
 *.portes {
   width: 2em;
   height: 2em;
-  background-image: url(../persos/porte.png);
+  background-image: url(../images/persos/porte.png);
   background-position: bottom;
   margin-top: 0px;
   margin-left: 0em;

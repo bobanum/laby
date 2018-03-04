@@ -5,6 +5,7 @@
     },
     "source": {
         "include": ["."],
+        "exclude": ["geometrie"],
 		"includePattern": ".js$",
         "excludePattern": "(node_modules/|docs)"
     },

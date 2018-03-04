@@ -37,7 +37,7 @@ class Sprite extends Point {
 		return Point.fromObject(this);
 	}
 	set position(val) {
-		val = Point.createFrom(val);
+		val = Point.from(val);
 		this.x = val.x;
 		this.y = val.y;
 	}

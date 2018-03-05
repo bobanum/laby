@@ -110,7 +110,7 @@ class Skin {
 		this.styles.cellule = s.sheet.cssRules[2].style;
 		this.styles.grille.backgroundImage = 'url("'+this.cheminTexture('plancherbriques/256.png')+'")';
 		this.styles.grille.backgroundSize = '100px';
-		this.styles.cellule.backgroundImage = 'url("'+this.chemin('gravier2.png')+'")';
+		this.styles.cellule.backgroundImage = 'url("'+this.chemin('murs.svg')+'")';
 	}
 	static perso() {
 		var largeur, hauteur;

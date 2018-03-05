@@ -139,8 +139,8 @@ class Skin {
 		}
 	}
 	static init() {
-		this._chemin = "../images/skins";
-		this._cheminTextures = "../images/textures";
+		this._chemin = "images/skins";
+		this._cheminTextures = "images/textures";
 		this.prototype.skin = this.skin = "pierre";
 		this.skins = ["pierre", "brique", "ligne", "ligne2", "courbe", "rond", "bosses", "creux", "mur", "tuyau", "autre", "angle", "angle2", "rough", "route"];
 		window.addEventListener("load", function () {

@@ -67,9 +67,9 @@ class Labyrinthe {
 
 		$this->laby = $laby;						// On garde le labyrinthe
 	}
-	function js(){
+	function js($nomVar = "gLaby"){
 		$laby = $this->laby;
-		$resultat = "var laby = ";
+		$resultat = "var $nomVar = ";
 		$res = array();
 		$hauteur = $this->hauteur;
 		$largeur = $this->largeur;

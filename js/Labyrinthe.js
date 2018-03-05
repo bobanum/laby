@@ -4,8 +4,9 @@ class Labyrinthe {
 	constructor(largeur, hauteur) {
 		this.largeur = largeur || 10;
 		this.hauteur = hauteur || 10;
+		this.wrap = [false, false];
+		this.sorties = true;
 		this.creer();
-		this.ajouterEntreeSortie();
 	}
 	/**
 	 * Retourne une grille de la dimension du labyrinthe
@@ -49,6 +50,12 @@ class Labyrinthe {
 		if (arguments[0] instanceof Curseur) {
 			return this.cellule(arguments[0].rangee, arguments[0].colonne);
 		}
+		if (this.wrap[0]) {
+			rangee = ((rangee % this.hauteur) + this.hauteur) % this.hauteur;
+		}
+		if (this.wrap[1]) {
+			colonne = ((colonne % this.largeur) + this.largeur) % this.largeur;
+		}
 		if (rangee < 0 || rangee >= this.hauteur || colonne < 0 || colonne >= this.largeur) {
 			return false;
 		}
@@ -78,6 +85,9 @@ class Labyrinthe {
 				curseur = trajet.pop(); // On retire la direction
 			}
 		} // On arrête le curseur et le labyrinthe quand le curseur est à son point de départ
+		if (this.sorties) {
+			this.ajouterEntreeSortie();
+		}
 		return this; // On retourne le labyrinthe
 	}
 	/**

@@ -105,6 +105,7 @@ class App {
 			btn_taille: {
 				click: function () {
 					var l = new Labyrinthe(10,10);
+					l.creer();
 					var node = l.affichage("pierre");
 					document.body.appendChild(node);
 				}
